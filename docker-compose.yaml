@@ -1,0 +1,54 @@
+ 
+version: '3.8'
+services:
+  # Staging apps
+  staging-app1:
+    build: ./staging/app1
+    ports:
+      - "3001:3001"
+
+  staging-app2:
+    build: ./staging/app2
+    ports:
+      - "3002:3002"
+
+  staging-app3:
+    build: ./staging/app3
+    ports:
+      - "3003:3003"
+
+  staging-app4:
+    build: ./staging/app4
+    ports:
+      - "3004:3004"
+
+  staging-app5:
+    build: ./staging/app5
+    ports:
+      - "3005:3005"
+
+  # Production apps
+  prod-app1:
+    build: ./production/app1
+    ports:
+      - "4001:4001"
+
+  prod-app2:
+    build: ./production/app2
+    ports:
+      - "4002:4002"
+
+  prod-app3:
+    build: ./production/app3
+    ports:
+      - "4003:4003"
+
+  prod-app4:
+    build: ./production/app4
+    ports:
+      - "4004:4004"
+
+  prod-app5:
+    build: ./production/app5
+    ports:
+      - "4005:4005"

@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_COMPOSE_PATH = '/usr/local/bin/docker-compose' // adjust if needed
         REPO_DIR = "${WORKSPACE}"
     }
 
@@ -15,28 +14,27 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                script {
-                    sh "docker-compose -f ${REPO_DIR}/docker-compose.yaml build"
-                }
+                bat "docker-compose -f ${REPO_DIR}\\docker-compose.yaml build"
             }
         }
 
         stage('Deploy Containers') {
             steps {
-                script {
-                    sh "docker-compose -f ${REPO_DIR}/docker-compose.yaml up -d"
-                }
+                bat "docker-compose -f ${REPO_DIR}\\docker-compose.yaml up -d"
             }
         }
     }
 
     post {
         always {
-            echo "Pipeline finished"
+            echo "Pipeline finished ✅"
         }
         failure {
-            echo "Pipeline failed"
+            echo "Pipeline failed ❌"
+        }
+        cleanup {
+            echo "Cleaning up containers 🧹"
+            bat "docker-compose -f ${REPO_DIR}\\docker-compose.yaml down || exit 0"
         }
     }
 }
-
